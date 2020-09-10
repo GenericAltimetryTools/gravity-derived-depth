@@ -1,8 +1,8 @@
 # gravity ocean depth (GOD)
 
 ## Introduction
-使用重力地质法，以重力异常、船测水深为参数进行水深反演。
-主要使用matlab＋gmt实现ggm算法。
+#使用重力地质法，以重力异常、船测水深为参数进行水深反演。
+#主要使用matlab＋gmt实现ggm算法。
 ## usage
 result=GGM(free,control,check,1,-8800,'142.6/147.3/23/27')
 
