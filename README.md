@@ -5,7 +5,18 @@
 
 主要使用matlab＋gmt实现ggm算法。
 ## usage
-result=GGM(free,control,check,1,-8800,'142.6/147.3/23/27')
+result=GGM(free,control,check,d,range)
+
+free为重力异常
+
+control为控制水深点
+
+check为检核水深点
+
+d为参考深度
+
+range为反演范围
+
 
 result包含了所有的反演结果
 
