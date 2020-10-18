@@ -1,0 +1,6 @@
+*.nc
+*.cpt
+*.ps
+gmt.history
+tmp.*
+*.grd
