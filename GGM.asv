@@ -1,10 +1,10 @@
 function [output]=GGM(free,control,check,d,range)
-%% usage:    GGM(free,control,check,-8000,'142.6/147.3/23/27')
+%usage:    GGM(free,control,check,-8000,'142.6/147.3/23/27')
 %         free&control&check点位矩阵
-%   d=-8000 为参考水深
-%   range='142.6/147.3/23/27' Test area
+%d=-8000 为参考水深
+%range='142.6/147.3/23/27' Test area
 
-%% -------------------------------数据准备------------------------------------
+%-------------------------------数据准备------------------------------------
 
 order=['surface -R',range,' -I1m -Gfree.grd -T0.25 -C0.1 -Vl'];
 gmt(order,free);
@@ -12,10 +12,8 @@ gmt(order,free);
 control=gmt('select -Rfree.grd',control); % remove the outside data of the input depth
 
 control_free=gmt('grdtrack -Gfree.grd ',control.data(:,1:2)); % GMT grdtrack
-whos
 % If you meet the wrong message about the data structure, it may related
-% to the GMT version problem. Remove all the `.data` in `control.data` as
-% well as the belowing. It will be `control(:,1:2)` instead of `control.data(:,1:2)`
+% to the GMT version problem. Remove `control`
 %% 
 %---------------------------求最合适密度差---------------------------------
 %---------------------------Calculate the best density differenec---------
@@ -58,7 +56,7 @@ gmt(order,[control.data(:,1:2) control_long]);
 
 gmt('grdmath free.grd long.grd SUB = short.grd')
 
-tem1=num2str(2*3.1415*6.67259*10^-8*suit_rou*100000); % GGM.grd is the output ocean depth.
+tem1=num2str(2*3.1415*6.67259*10^-8*suit_rou*100000);%求出GGM.grd 
 order1=['grdmath short.grd ',tem1,' DIV ',num2str(d),' ADD = ggm.grd'];
 gmt(order1);
 

@@ -5,18 +5,18 @@
 % Author: Wang Yongkang
 % Editor: Lei Yang
 
-% Set GMT path. 
+%% Set GMT path. 
 oldpath = path;
-path(oldpath,'C:\programs\gmt6exe\bin')
+path(oldpath,'C:\programs\gmt6exe\bin'); % should change it to your path.
 
 clc
 clear
 
-% Set loading files
+%% Set loading files
 free=load('free.txt'); % Gravity Anamony data.
 control=load('control.txt'); % Input ocean depth data
 check=load('check.txt'); % checking data of depth
 range='142.6/147.3/23/27'; % ocean area
 
-% Call the GGM function
-result=GGM(free,control,check,-8000,range)
+%% Call the GGM function
+result=GGM(free,control,check,-8000,range);

@@ -33,6 +33,15 @@ output.detaD为反演水深点与检核点深度差值
 output.rou_std_list为不同密度下相关系数和标准差
 ggm.drd is the output result
 
+## Plot
+Use the `3d2.bat` to make 3D figure as shown in the top.
+Use the `plot_plan.bat` to make 2D figure. 
+
+## Bug
+You may have the wrong message that the calculated parameters from GMT is not `stucture`. In that case, just remove the `.data` for all of the parameters got from GMT. For example, change the `control.data(:,1:2)` to `control(:,1:2)`. 
+
+This bug may caused by GMT version changes.
+
 ## Citation
 In preparation. 
 ## Contributor

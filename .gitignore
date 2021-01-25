@@ -4,3 +4,5 @@
 gmt.history
 tmp.*
 *.grd
+*.png
+*.grd
