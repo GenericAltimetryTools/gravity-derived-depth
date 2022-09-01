@@ -2,16 +2,17 @@ function [output]=GGM(free,control,check,d,range)
 %% usage:    GGM(free,control,check,-8000,'142.6/147.3/23/27')
 %         free&control&check点位矩阵
 %   d=-8000 为参考水深
+%   rou=0.7
 %   range='142.6/147.3/23/27' Test area
 
 %% -------------------------------数据准备------------------------------------
 
 order=['surface -R',range,' -I1m -Gfree.grd -T0.25 -C0.1 -Vl'];
-gmt(order,free);
+gmt(order,free); % generate gravity grid from free.txt file
 
-control=gmt('select -Rfree.grd',control); % remove the outside data of the input depth
+control=gmt('select -Rfree.grd',control); % data in the same extent.
 
-control_free=gmt('grdtrack -Gfree.grd ',control.data(:,1:2)); % GMT grdtrack
+control_free=gmt('grdtrack -Gfree.grd ',control.data(:,1:2)); % GMT grdtrack select the gravity on the control points.
 whos
 % If you meet the wrong message about the data structure, it may related
 % to the GMT version problem. Remove all the `.data` in `control.data` as
@@ -25,7 +26,7 @@ xianguanlist=[];
 for rou=0.5:0.1:5 % 在一个范围内寻找最合适密度差，可以修改范围. Set a initial searching extent and this can be changed according to your area.
 roulist=[roulist rou];
 
-control_short=(control.data(:,3)-d)*2*3.1415*6.67259*10^-8*rou*100000;
+control_short=(control.data(:,3)-d)*2*3.1415*6.67259*(10^-8)*rou*100000;
 
 control_long=control_free.data(:,3)-control_short;
 
@@ -59,7 +60,7 @@ gmt(order,[control.data(:,1:2) control_long]);
 gmt('grdmath free.grd long.grd SUB = short.grd')
 
 tem1=num2str(2*3.1415*6.67259*10^-8*suit_rou*100000); % GGM.grd is the output ocean depth.
-order1=['grdmath short.grd ',tem1,' DIV ',num2str(d),' ADD = ggm.grd'];
+order1=['grdmath short.grd ',tem1,' DIV ',num2str(d),' ADD = ggm.grd']; % This step can be changed to AI.
 gmt(order1);
 
 ggm_depth=gmt('grdtrack -Gggm.grd -h',check(:,1:2));
