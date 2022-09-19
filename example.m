@@ -19,6 +19,7 @@ check=load('check.txt'); % checking data of depth
 range='142.6/147.3/23/27'; % ocean area
 d=-8000;
 %% Call the GGM function
+% 这里有两个GGM程序，GGM()使用单波束数据作为控制和检核，GGM_multbeam()使用单波束作为控制，多波束作为检核。
 % result=GGM(free,control,check,d,range);
 result=GGM_multbeam(free,control,check,d,range);
 
@@ -54,3 +55,5 @@ disp(X)
 
 delete free.grd
 delete long.grd
+delete short.grd
+delete ggm.grd
