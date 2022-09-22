@@ -13,10 +13,31 @@ clc
 clear
 
 %% Set loading files
-free=load('free.txt'); % Gravity Anamony data.
-control=load('control.txt'); % Input ocean depth data
-check=load('check.txt'); % checking data of depth
-range='142.6/147.3/23/27'; % ocean area
+% gmt grdcut -R-15/5/-4/4 Free_Air_Gravity_Anomalies.nc -Gsubset.nc
+range='-15/5/-4/4'; % ocean area
+order=['grd2xyz guinea.nc '];
+free0=gmt(order);
+free=free0.data;
+
+% free=load('free.txt'); % Gravity Anamony data.
+control=load('guinea.txt'); % Input ocean depth data
+index=randperm(length(control));
+% index=1:5:length(control);
+% k=[];
+% n=1;
+% % 判断不在check的单波束index
+% for i=1:length(control)
+%     if mod(i,5)~=0
+%         k(n)=i;
+%         n=n+1;
+%     end
+% end
+% 
+temp=fix(length(control)*0.2);
+check=control(index(1:temp),:);
+temp=fix(length(control)*0.8);
+control=control(index(1:temp),:);
+
 d=-8000;
 %% Call the GGM function
 % 这里有两个GGM程序，GGM()使用单波束数据作为控制和检核，GGM_multbeam()使用单波束作为控制，多波束作为检核。

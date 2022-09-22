@@ -23,7 +23,7 @@ whos
 stdlist=[];
 roulist=[];
 xianguanlist=[];
-for rou=0.5:0.1:5 % 在一个范围内寻找最合适密度差，可以修改范围. Set a initial searching extent and this can be changed according to your area.
+for rou=0.5:0.1:1.5 % 在一个范围内寻找最合适密度差，可以修改范围. Set a initial searching extent and this can be changed according to your area.
 roulist=[roulist rou];
 
 control_short=(control.data(:,3)-d)*2*3.1415*6.67259*(10^-8)*rou*100000;
