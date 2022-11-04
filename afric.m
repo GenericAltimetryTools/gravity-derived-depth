@@ -19,26 +19,18 @@ order=['grd2xyz guinea.nc '];
 free0=gmt(order);
 free=free0.data;
 
-% free=load('free.txt'); % Gravity Anamony data.
-control=load('guinea.txt'); % Input ocean depth data
-index=randperm(length(control));
-% index=1:5:length(control);
-% k=[];
-% n=1;
-% % 判断不在check的单波束index
-% for i=1:length(control)
-%     if mod(i,5)~=0
-%         k(n)=i;
-%         n=n+1;
-%     end
-% end
-% 
-temp=fix(length(control)*0.2);
-check=control(index(1:temp),:);
-temp=fix(length(control)*0.8);
-control=control(index(1:temp),:);
+% control=load('guinea.txt'); % Input ocean depth data
+% index=randperm(length(control));
+% temp=fix(length(control)*0.2);
+% check=control(index(1:temp),:);
+% temp=fix(length(control)*0.8);
+% control=control(index(1:temp),:);
 
+% The same as the Python AI
+control=load('cont.txt'); % Input ocean depth data
+check=load('chec.txt');
 d=-8000;
+
 %% Call the GGM function
 % 这里有两个GGM程序，GGM()使用单波束数据作为控制和检核，GGM_multbeam()使用单波束作为控制，多波束作为检核。
 result=GGM(free,control,check,d,range);
@@ -74,7 +66,8 @@ nbins = 100; h = histogram(d_d,nbins);%与hist相同
 X = [' The STD difference between GGM and the truth is: ',num2str(std(d_d)),' meter'];
 disp(X)
 
-delete free.grd
-delete long.grd
-delete short.grd
-delete ggm.grd
+% save result.mat result 
+% delete free.grd
+% delete long.grd
+% delete short.grd
+% delete ggm.grd
